@@ -1,0 +1,9 @@
+{
+    "application": "onyxfood",
+    "identifier": "common",
+    "name": "common",
+    "author": "zero",
+    "preview": "preview.png",
+    "version": "1.0.0",
+    "templates_path": "/srv/Onyx.Food-Server/onyx_food/templates"
+}
