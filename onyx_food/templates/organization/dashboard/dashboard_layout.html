@@ -1,0 +1,98 @@
+{% extends theme("layout.html") %}
+
+{% block content %}
+<div class="content_wrap">
+        <div id="navigation_root">
+                    <div class="navigation header">
+                        <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="155.000000pt" height="20.000000pt" viewBox="0 0 155.000000 20.000000" preserveAspectRatio="xMidYMid meet"><g transform="translate(0.000000,20.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none"><path d="M40 162 c-85 -85 35 -207 127 -128 22 19 28 32 28 65 0 52 -27 81 -83 88 -36 5 -45 2 -72 -25z m88 -24 c17 -17 15 -63 -3 -78 -8 -6 -23 -9 -35 -5 -15 5 -20 15 -20 45 0 46 30 66 58 38z"/><path d="M820 100 c0 -89 0 -90 25 -90 21 0 25 5 25 30 0 28 3 30 35 30 28 0 35 4 35 20 0 16 -7 20 -35 20 -28 0 -35 4 -35 20 0 17 7 20 40 20 33 0 40 3 40 20 0 18 -7 20 -65 20 l-65 0 0 -90z"/><path d="M250 80 c0 -68 1 -70 25 -70 22 0 25 5 25 32 l0 33 23 -32 c13 -20 31 -33 45 -33 21 0 22 4 22 70 0 63 -2 70 -20 70 -16 0 -20 -7 -20 -32 l-1 -33 -28 33 c-15 18 -37 32 -49 32 -21 0 -22 -5 -22 -70z"/><path d="M460 106 c16 -25 30 -56 30 -70 0 -21 5 -26 25 -26 21 0 25 5 25 31 0 16 11 47 25 67 l25 37 -22 3 c-14 3 -29 -4 -40 -18 l-17 -21 -13 20 c-8 13 -23 21 -41 21 l-28 0 31 -44z"/><path d="M641 118 l23 -31 -22 -39 -23 -38 25 0 c14 0 31 9 40 21 l14 21 11 -21 c8 -14 21 -21 42 -21 l30 0 -26 35 -27 34 22 36 22 35 -26 0 c-14 0 -30 -8 -35 -17 -10 -17 -12 -17 -25 0 -7 9 -25 17 -40 17 l-27 0 22 -32z"/><path d="M1022 134 c-33 -23 -31 -88 3 -110 31 -20 94 -13 112 13 49 66 -46 146 -115 97z m73 -34 c9 -29 -4 -62 -23 -58 -18 3 -28 39 -18 64 8 21 34 17 41 -6z"/><path d="M1216 129 c-29 -22 -35 -63 -13 -92 18 -26 81 -33 112 -13 34 22 36 87 3 110 -31 22 -70 20 -102 -5z m69 -49 c0 -40 -29 -55 -40 -21 -9 30 4 63 23 59 12 -2 17 -14 17 -38z"/><path d="M1390 80 l0 -70 48 0 c65 0 92 20 92 70 0 50 -27 70 -92 70 l-48 0 0 -70z m85 0 c0 -25 -5 -36 -17 -38 -15 -3 -18 4 -18 38 0 34 3 41 18 38 12 -2 17 -13 17 -38z"/></g></svg>
+                    </div>
+
+                    <div class="navigation body">
+                        <div class="nav_container">
+                            <nav>
+                                <ul>
+                                    <li>
+                                        <a class="navigation btn" id="restaurants_btn" href="{{url_for('organization.dashboard', organizationId=organization.id)}}">
+                                            <div class="link_content">
+                                                <div class="btn_icon"><i class="fa fa-home"  aria-hidden="true"></i></div>
+                                                <div class="btn_name"><p>Рестораны</p></div>
+                                            </div>
+                                        </a>
+                                        <hr class="divider">
+                                        <a class="navigation btn" id="orders_btn" href="{{url_for('organization.dashboard_orders', organizationId=organization.id)}}">
+                                            <div class="link_content">
+                                                <div class="btn_icon"><i class="fa fa-archive" aria-hidden="true"></i></div>
+                                                <div class="btn_name"><p>Заказы</p></div>
+                                            </div>
+                                        </a>
+                                        <a class="navigation btn" id="menus_btn" href="{{url_for('organization.dashboard_menus', organizationId=organization.id)}}">
+                                            <div class="link_content">
+                                                <div class="btn_icon"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                                                <div class="btn_name"><p>Меню</p></div>
+                                            </div>
+                                        </a>
+                                        <a class="navigation btn" id="statistics_btn" href="{{url_for('organization.dashboard_statistics', organizationId=organization.id)}}">
+                                            <div class="link_content">
+                                                <div class="btn_icon"><i class="fa fa-line-chart" aria-hidden="true"></i></div>
+                                                <div class="btn_name"><p>Статистика</p></div>
+                                            </div>
+                                        </a>
+                                        <a class="navigation btn" id="history_btn" href="{{url_for('organization.dashboard_history', organizationId=organization.id)}}">
+                                            <div class="link_content">
+                                                <div class="btn_icon"><i class="fa fa-history" aria-hidden="true"></i></div>
+                                                <div class="btn_name"><p>История</p></div>
+                                            </div>
+                                        </a>
+                                        <a class="navigation btn" id="work_hours_btn" href="{{url_for('organization.dashboard_work_hours', organizationId=organization.id)}}">
+                                            <div class="link_content">
+                                                <div class="btn_icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                                                <div class="btn_name"><p>График работы</p></div>
+                                            </div>
+                                        </a>
+                                        <a class="navigation btn" id="cooking_time_btn" href="{{url_for('organization.dashboard_cooking_time', organizationId=organization.id)}}">
+                                            <div class="link_content">
+                                                <div class="btn_icon"><i class="fa fa-hourglass-o" aria-hidden="true"></i></div>
+                                                <div class="btn_name"><p>Время готовки</p></div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <hr class="divider">
+                    <div class="navigation footer">
+                        <div id="popup-content" class="popup-content" style="--number:1">
+                            <p>LOREM IPSUM</p>
+                        </div>
+                        <ul>
+                            <li>
+                                <button onclick="popUp()" class="navigation btn" >
+                                    <div class="btn_icon"><i class="fa fa-suitcase"  aria-hidden="true"></i></div>
+                                    <div class="btn_name"><p>{{ organization.name }}</p></div>
+                                </button>
+                                
+                            </li>
+                            <li>
+                                <button class="navigation btn" onclick="popUp()">
+                                        <div class="btn_icon"><i class="fa fa-cog" aria-hidden="true"></i></div>
+                                        <div class="btn_name"><p>Настройки</p></div>
+                                </button>
+                            </li>
+                            <li>
+                                <button class="navigation btn" onclick="popUp()">
+                                        <div class="btn_icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                                        <div class="btn_name"><p>{{current_user.name}} {{current_user.second_name}}</p></div>
+                                </button>
+                            </li>
+
+                        </ul>   
+                    </div>
+        </div>
+    <div class="middle_side-nav content_layout">
+        {% block dashboard_content %}{% endblock %}
+    </div>
+</div>
+
+{% endblock %}

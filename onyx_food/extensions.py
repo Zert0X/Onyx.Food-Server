@@ -20,7 +20,7 @@ mail = Mail()
 cache = Cache()
 
 # CSRF
-#csrf = CSRFProtect()
+csrf = CSRFProtect()
 
 # Database
 metadata = MetaData(
@@ -32,4 +32,4 @@ metadata = MetaData(
     }
 )
 metadata_main = copy.deepcopy(metadata)
-db_main = SQLAlchemy(metadata=metadata_main, session_options={"expire_on_commit": False})
+db = SQLAlchemy(metadata=metadata_main, session_options={"expire_on_commit": False})

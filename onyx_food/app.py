@@ -1,12 +1,19 @@
 
 import os
 from flask import Flask
+
 from onyx_food._compat import string_types
+from onyx_food.extensions import (db, themes, cache, mail, login_manager, csrf)
+from onyx_food.utils.helpers import get_config
+
 from onyx_food.user.blueprint import user
 from onyx_food.user.models import GuestModel, UserModel
+
 from onyx_food.index.blueprint import index
-from onyx_food.extensions import (db_main, themes, cache, mail, login_manager)
-from onyx_food.utils.helpers import get_config
+
+from onyx_food.organization.blueprint import organization
+from onyx_food.organization.models import OrganizationModel
+
 
 def create_app(instance_path=None):
    app = Flask(
@@ -49,10 +56,7 @@ def configure_extensions(app):
    themes.init_themes(app, app_identifier="onyxfood", theme_url_prefix="/themes")
    
    # Flask-SQLAlchemy
-   db_main.init_app(app)
-
-   # Flask-Login
-   login_manager.anonymous_user = GuestModel
+   db.init_app(app)
 
    # Flask-Mail
    mail.init_app(app)
@@ -60,10 +64,13 @@ def configure_extensions(app):
    # Flask-Cache
    cache.init_app(app)
 
+   # Flask-Login
+   login_manager.anonymous_user = GuestModel
+
    @login_manager.user_loader
    def load_user(user_id):
       """Loads the user. Required by the `login` extension."""
-      user_instance = User.query.filter_by(id=user_id).first()
+      user_instance = UserModel.query.filter_by(id=user_id).first()
       if user_instance:
          return user_instance
       else:
@@ -74,4 +81,5 @@ def configure_extensions(app):
 
 def configure_blueprints(app):
     app.register_blueprint(user, url_prefix='/user')
+    app.register_blueprint(organization, url_prefix='/organization')
     app.register_blueprint(index)

@@ -4,6 +4,12 @@ from onyx_food._compat import string_types
 from flask_login import current_user
 from flask import session, current_app, Blueprint
 from flask_themes2 import render_theme_template
+from datetime import datetime, timedelta
+from pytz import UTC
+
+def time_utcnow():
+    """Returns a timezone aware utc timestamp."""
+    return datetime.now(UTC)
 
 def render_template(template, **context):
     """A helper function that uses the `render_theme_template` function
