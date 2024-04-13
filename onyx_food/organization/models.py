@@ -43,9 +43,26 @@ class OrganizationModel(db.Model):
         db.session.expunge_all()
         return True
 
+
+
+#SECTION Restaurants
+class RestaurantModel(db.Model):
+    __bind_key__ = 'main'
+    __tablename__ = 'restaurants'
+
+    id    = db.Column(Integer, nullable=False, primary_key=True)
+    name  = db.Column(String(50))
+    org_id = db.Column(Integer, nullable=False)
+    region  = db.Column(String(50))
+    city  = db.Column(String(50))
+    street  = db.Column(String(50))
+    house  = db.Column(String(20))
+
 class MenuModel(db.Model):
     __bind_key__ = 'main'
     __tablename__ = 'menu'
 
     id    = db.Column(Integer, nullable=False, primary_key=True)
     name  = db.Column(String(255))
+
+#!SECTION

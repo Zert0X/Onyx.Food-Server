@@ -9,7 +9,7 @@ from onyx_food.utils.exceptions import ValidationError
 def organization_access_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if (not organizationId in get_user_organizations(current_user)):
+        if (not organizationID in get_user_organizations(current_user)):
             raise ValidationError("Нет доступа к организации")
         return f(*args, **kwargs)
     return decorated_function

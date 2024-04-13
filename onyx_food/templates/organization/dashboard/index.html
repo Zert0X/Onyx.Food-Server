@@ -4,5 +4,16 @@
         document.getElementById("restaurants_btn").classList.toggle("active")
     </script>
     <div class="content">
+        {% if restaurants|length == 0 %}
+            <div class="emptyplaceholder"></div>
+        {% else %}
+            <ul>
+                {% for restaurant in restaurants %}
+                <li>
+                    {{ restaurant.name }}
+                </li>
+                {% endfor %}
+            </ul>    
+        {% endif %}
     </div>
 {% endblock %}
