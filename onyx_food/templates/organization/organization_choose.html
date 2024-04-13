@@ -1,0 +1,25 @@
+{% extends theme("layout.html") %}
+{% block content %}
+<script>
+    function reply_click(clicked_id){
+        const el = document.createElement("input");
+        el.value = clicked_id;
+        el.name = "chosen_organization"
+        el.id = "chosen_organization";
+        el.hidden = true;
+
+        const form = document.getElementById("organization_choose");
+        form.appendChild(el);
+        form.submit();
+    };
+</script>
+<div class="content_wrap">
+    <form id="organization_choose" method="post">
+    {% for organization in organizations %}
+        <button id="{{ organization.id }}" class="btn" onClick="reply_click(this.id)">
+            <div><p>{{ organization.name }}</p></div>
+        </button>
+    {% endfor %}
+    </form>
+</div>
+{% endblock %}
