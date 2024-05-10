@@ -1,0 +1,38 @@
+{% extends theme("organization/dashboard/dashboard_layout.html") %}
+{% block dashboard_content %}
+<script>
+    document.getElementById("orders_btn").classList.toggle("active")
+</script>
+<div class="content">
+    <div class="content_header">
+        <h1 style="display: inline;">Заказы</h1>
+        <a class="button" onClick="window.location.reload();"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+        <a class="button" >Сделаем вид что это выпадающий список<i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+    </div>
+    <div class="content_body orders">
+        <div class="orders_menu">
+            <ul class="orders">
+                {% for order in orders %}
+                <li>
+                    <div id="order_{{order.id}}"class="button node btn-order-open" data-toggle="modal" data-modal="{{ url_for('organization.dashboard_order_info', organizationID=organization.id, orderID=order.id) }}">
+                        <h2>{{ order.price }}</h2>
+                        <p>№ {{ order.id }}</p>
+                        <p>Доставка Onyx-Food</p>
+                    </div>
+                    
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="order_info">
+            <div class="modal order" id="Modal" tabindex="-1" role="dialog" aria-labelledby="FormModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <!-- load content here -->
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -6,8 +6,6 @@
   height: 100%;
   width: 232px;
 
-  font-family: var(--fancy-font), sans-serif;
-
   border: 1px solid rgba(255, 255, 255, 0.1);
   background-color: var(--background-color-primary);
   backdrop-filter: blur(8px);
@@ -69,9 +67,9 @@
   }
 }
 
-.btn{
+.navbtn{
   min-height: 50px;
-  .btn_icon{
+  .navnavbtn_icon{
     padding-left: 16px;
     display: flex;
     -moz-box-align: center;
@@ -79,14 +77,14 @@
     padding-top: 16px;
     padding-bottom: 16px;
   }
-  .btn_name{
+  .navnavbtn_name{
     align-items: start;
   }
 }
-.btn.active{
+.navbtn.active{
   background: rgb(255, 255, 255) !important;
 }
-.btn:hover, .navigation.btn:focus{
+.navbtn:hover, .navigation.navbtn:focus{
   background: rgb(230, 230, 230);
 }
 
@@ -107,9 +105,9 @@
   text-decoration: none;
   display: inline-block;
 }
-.navigation.btn{
+.navigation.navbtn{
   min-height: 50px;
-  .btn_icon{
+  .navbtn_icon{
     padding-left: 16px;
     display: flex;
     -moz-box-align: center;
@@ -117,17 +115,17 @@
     padding-top: 16px;
     padding-bottom: 16px;
   }
-  .btn_name{
+  .navbtn_name{
     align-items: start;
   }
 }
-.navigation.btn.active{
+.navigation.navbtn.active{
   background: rgb(255, 255, 255) !important;
 }
-.navigation.btn:hover, .navigation.btn:focus{
+.navigation.navbtn:hover, .navigation.navbtn:focus{
   background: rgb(230, 230, 230);
 }
-.navigation.btn::before{
+.navigation.navbtn::before{
   display: inline-block;
 }
 
@@ -148,7 +146,7 @@ button.navigation{
   min-height: 32px;
   line-height: 10px;
   flex-shrink: 0;
-  .btn_icon{
+  .navbtn_icon{
     padding-left: 1rem;
     display: flex;
     -moz-box-align: center;
@@ -157,21 +155,22 @@ button.navigation{
     padding-bottom: 8px;
   }
 }
-.btn_name{
+.navbtn_name{
   display: flex;
-  font-size: 1rem;
+  font-size: 1.2rem;
   -moz-box-align: center;
   min-width: 0px;
   -moz-box-flex: 1;
   flex-direction: column;
   flex: 1 1 0%;
   overflow: hidden;
+  margin-left: 8px;
 p{
   content: attr(data-tail);
   float: right;
 }
 }
-.btn_icon{
+.navnavbtn_icon{
   font-size: 1.5rem;
   width: 32px;
 }
@@ -197,14 +196,24 @@ p{
   }
   #navigation_root:hover{
     width: 232px !important;
-    .btn_name{
+    .navbtn_name{
       display: flex;
     }
   }
-  .btn_name{
+  .navbtn_name{
     display: none;
   }
   .middle_side-nav{
     margin-left: 72px !important;
+  }
+}
+
+.middle_side-nav{
+  .content_header{
+    &.borderless{
+      border: none;
+    }
+    border-bottom: 1px solid #DDD;
+    padding-bottom: 10px;
   }
 }

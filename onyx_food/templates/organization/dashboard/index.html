@@ -1,19 +1,41 @@
 {% extends theme("organization/dashboard/dashboard_layout.html") %}
 {% block dashboard_content %}
+    <script src="https://api-maps.yandex.ru/v3/?apikey=ac2d9b31-07a3-4895-bd4d-9d10f092172a&lang=ru_RU"></script>
     <script>
         document.getElementById("restaurants_btn").classList.toggle("active")
     </script>
     <div class="content">
-        {% if restaurants|length == 0 %}
-            <div class="emptyplaceholder"></div>
-        {% else %}
-            <ul>
-                {% for restaurant in restaurants %}
-                <li>
-                    {{ restaurant.name }}
-                </li>
-                {% endfor %}
-            </ul>    
-        {% endif %}
+        <div class="content_header borderless">
+            <a class="button header btn-modal-open" data-toggle="modal" data-modal="{{ url_for('organization.restaurant_add', organizationID=organization.id) }}"><i class="fa fa-plus" aria-hidden="true"></i>Добавить</a>
+        </div>
+        <div class="content_body">
+            {% if restaurants|length == 0 %}
+                <div class="emptyplaceholder"></div>
+            {% else %}
+                <ul class="restaurants">
+                    {% for restaurant in restaurants %}
+                    <li>
+                        <div id="restaurant_{{restaurant.id}}"class="button node" onclick="restaurant_node_click(this.id)">
+                            <h2>{{ restaurant.name }}</h2>
+                            <p>{{ restaurant.street }}, {{ restaurant.house }}</p>
+                            <p>{{ restaurant.city }}, {{ restaurant.region }}</p>
+                        </div>
+                        
+                    </li>
+                    {% endfor %}
+                </ul>
+                <form id="restaurant_choose" method="post"></form>    
+            {% endif %}
+        </div>
+        
+        <!-- Dynamic Modal -->
+        <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="FormModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <!-- load content here -->
+                </div>
+            </div>
+        </div>
+        <!-- End Dynamic Modal -->
     </div>
 {% endblock %}

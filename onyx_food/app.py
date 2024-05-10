@@ -3,7 +3,7 @@ import os
 from flask import Flask
 
 from onyx_food._compat import string_types
-from onyx_food.extensions import (db, themes, cache, mail, login_manager, csrf)
+from onyx_food.extensions import *
 from onyx_food.utils.helpers import get_config
 
 from onyx_food.user.blueprint import user
@@ -63,6 +63,9 @@ def configure_extensions(app):
 
    # Flask-Cache
    cache.init_app(app)
+
+   #Flask-Bootstrap
+   bootstrap.init_app(app)
 
    # Flask-Login
    login_manager.anonymous_user = GuestModel

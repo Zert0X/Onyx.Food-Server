@@ -1,0 +1,26 @@
+
+<script>
+    initMap();
+</script>
+<form id="ModalForm" name="stepForm" class="form" method="post">
+    <div class="modal-header">
+        <svg class="modal__cross btn-modal-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/></svg>
+        <h3 class="modal__title">Добавление ресторана</h3>
+    </div>
+    <div class="modal-body">
+        <label>Название ресторана</label>
+        <input name="add_name" id="add_name" type="text" value="" placeholder="Название ресторана"><br>
+        <label>Использовать курьеров Onyx-Food?</label>
+        <input name="add_our_couriers" id="add_our_couriers" type="checkbox">
+        <input name="add_region" id="add_region" type="text" value="" hidden="true">
+        <input name="add_city" id="add_city" type="text" value="" hidden="true">
+        <input name="add_street" id="add_street" type="text" value="" hidden="true">
+        <input name="add_house" id="add_house" type="text" value="" hidden="true">
+        <p class="header">Выберите адрес</p>
+        <div id="map"></div>
+    </div>
+    <div class="modal-footer">
+        <button id="submit" type="submit" class="button dark">Сохранить</button>
+        <button type="button" class="button btn-modal-close" data-dismiss="modal" style="margin-left: 10px;">Отменить</button>
+    </div>
+</form>

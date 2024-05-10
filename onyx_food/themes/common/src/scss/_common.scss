@@ -1,3 +1,11 @@
+html, body {
+    height: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    font: 14px 'Lab Grotesque K',Arial,Tahoma,sans-serif;
+  }
+
 .divider{
     min-height: 1px;
     height: 1px;
@@ -9,4 +17,56 @@
 .content_wrap{
     display: flex;
     flex-direction: row;
+}
+
+a.button{
+    color: black;
+    text-decoration: none !important;
+ }
+
+.button{
+    border: medium;
+    border-radius: 8px;
+    background: rgb(255, 255, 255) center center / contain no-repeat padding-box;
+    padding: 8px 16px;
+    transition: background-color 100ms cubic-bezier(0.5, 1, 0.89, 1);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 0px 1px;
+    font-size: 16px;
+    cursor: pointer;
+    &.dark{
+        background: rgb(61, 61, 61) center center / contain no-repeat padding-box;
+        color: rgb(255, 255, 255);
+        box-shadow: rgb(61, 61, 61) 0px 0px 0px 1px;
+    }
+    &.header{
+        max-height: 14px;
+        display: inline-block;
+        font-size: 14px;
+        border: none;
+        box-shadow: none;
+        &.active{
+            border-bottom: 3px solid black;
+            border-radius: 0px !important;
+            pointer-events: none !important;
+        }
+        
+    }
+}
+.button:hover{
+    background-color: rgb(240, 240, 240);
+    background-image: none;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 0px 1px;
+}
+.button.dark:hover{
+    background-color: rgb(41, 41, 41);
+    background-image: none;
+    box-shadow: rgb(41, 41, 41) 0px 0px 0px 1px;
+}
+
+.node{
+    width: 250px;
+    padding: 5px 8px;
+    height: 130px;
+    margin: 15px;
+    overflow: clip;
 }

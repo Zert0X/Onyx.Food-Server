@@ -12,47 +12,47 @@
                             <nav>
                                 <ul>
                                     <li>
-                                        <a class="navigation btn" id="restaurants_btn" href="{{url_for('organization.dashboard', organizationID=organization.id)}}">
+                                        <a class="navigation navbtn" id="restaurants_btn" href="{{url_for('organization.dashboard', organizationID=organization.id)}}">
                                             <div class="link_content">
-                                                <div class="btn_icon"><i class="fa fa-home"  aria-hidden="true"></i></div>
-                                                <div class="btn_name"><p>Рестораны</p></div>
+                                                <div class="navbtn_icon"><i class="fa fa-home"  aria-hidden="true"></i></div>
+                                                <div class="navbtn_name"><p>Рестораны</p></div>
                                             </div>
                                         </a>
                                         <hr class="divider">
-                                        <a class="navigation btn" id="orders_btn" href="{{url_for('organization.dashboard_orders', organizationID=organization.id)}}">
+                                        <a class="navigation navbtn" id="orders_btn" href="{{url_for('organization.dashboard_orders', organizationID=organization.id)}}">
                                             <div class="link_content">
-                                                <div class="btn_icon"><i class="fa fa-archive" aria-hidden="true"></i></div>
-                                                <div class="btn_name"><p>Заказы</p></div>
+                                                <div class="navbtn_icon"><i class="fa fa-archive" aria-hidden="true"></i></div>
+                                                <div class="navbtn_name"><p>Заказы</p></div>
                                             </div>
                                         </a>
-                                        <a class="navigation btn" id="menus_btn" href="{{url_for('organization.dashboard_menus', organizationID=organization.id)}}">
+                                        <a class="navigation navbtn" id="menus_btn" href="{{url_for('organization.dashboard_menus', organizationID=organization.id)}}">
                                             <div class="link_content">
-                                                <div class="btn_icon"><i class="fa fa-bars" aria-hidden="true"></i></div>
-                                                <div class="btn_name"><p>Меню</p></div>
+                                                <div class="navbtn_icon"><i class="fa fa-bars" aria-hidden="true"></i></div>
+                                                <div class="navbtn_name"><p>Меню</p></div>
                                             </div>
                                         </a>
-                                        <a class="navigation btn" id="statistics_btn" href="{{url_for('organization.dashboard_statistics', organizationID=organization.id)}}">
+                                        <a class="navigation navbtn" id="statistics_btn" href="{{url_for('organization.dashboard_statistics', organizationID=organization.id)}}">
                                             <div class="link_content">
-                                                <div class="btn_icon"><i class="fa fa-line-chart" aria-hidden="true"></i></div>
-                                                <div class="btn_name"><p>Статистика</p></div>
+                                                <div class="navbtn_icon"><i class="fa fa-line-chart" aria-hidden="true"></i></div>
+                                                <div class="navbtn_name"><p>Статистика</p></div>
                                             </div>
                                         </a>
-                                        <a class="navigation btn" id="history_btn" href="{{url_for('organization.dashboard_history', organizationID=organization.id)}}">
+                                        <a class="navigation navbtn" id="history_btn" href="{{url_for('organization.dashboard_history', organizationID=organization.id)}}">
                                             <div class="link_content">
-                                                <div class="btn_icon"><i class="fa fa-history" aria-hidden="true"></i></div>
-                                                <div class="btn_name"><p>История</p></div>
+                                                <div class="navbtn_icon"><i class="fa fa-history" aria-hidden="true"></i></div>
+                                                <div class="navbtn_name"><p>История</p></div>
                                             </div>
                                         </a>
-                                        <a class="navigation btn" id="work_hours_btn" href="{{url_for('organization.dashboard_work_hours', organizationID=organization.id)}}">
+                                        <a class="navigation navbtn" id="work_hours_btn" href="{{url_for('organization.dashboard_work_hours', organizationID=organization.id)}}">
                                             <div class="link_content">
-                                                <div class="btn_icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
-                                                <div class="btn_name"><p>График работы</p></div>
+                                                <div class="navbtn_icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                                                <div class="navbtn_name"><p>График работы</p></div>
                                             </div>
                                         </a>
-                                        <a class="navigation btn" id="cooking_time_btn" href="{{url_for('organization.dashboard_cooking_time', organizationID=organization.id)}}">
+                                        <a class="navigation navbtn" id="cooking_time_btn" href="{{url_for('organization.dashboard_cooking_time', organizationID=organization.id)}}">
                                             <div class="link_content">
-                                                <div class="btn_icon"><i class="fa fa-hourglass-o" aria-hidden="true"></i></div>
-                                                <div class="btn_name"><p>Время готовки</p></div>
+                                                <div class="navbtn_icon"><i class="fa fa-hourglass-o" aria-hidden="true"></i></div>
+                                                <div class="navbtn_name"><p>Время готовки</p></div>
                                             </div>
                                         </a>
                                     </li>
@@ -63,27 +63,26 @@
                     </div>
                     <hr class="divider">
                     <div class="navigation footer">
-                        <div id="popup-content" class="popup-content" style="--number:1">
-                            <p>LOREM IPSUM</p>
+                        <div id="popup-content" class="popup-content">
                         </div>
                         <ul>
                             <li>
-                                <button onclick="popUp()" class="navigation btn" >
-                                    <div class="btn_icon"><i class="fa fa-suitcase"  aria-hidden="true"></i></div>
-                                    <div class="btn_name"><p>{{ organization.name }}</p></div>
+                                <button onclick="popUp()" class="navigation navbtn" >
+                                    <div class="navbtn_icon"><i class="fa fa-suitcase"  aria-hidden="true"></i></div>
+                                    <div class="navbtn_name"><p>{{ organization.name }}</p></div>
                                 </button>
                                 
                             </li>
                             <li>
-                                <button class="navigation btn" onclick="popUp()">
-                                        <div class="btn_icon"><i class="fa fa-cog" aria-hidden="true"></i></div>
-                                        <div class="btn_name"><p>Настройки</p></div>
+                                <button class="navigation navbtn" onclick="popUp()">
+                                        <div class="navbtn_icon"><i class="fa fa-cog" aria-hidden="true"></i></div>
+                                        <div class="navbtn_name"><p>Настройки</p></div>
                                 </button>
                             </li>
                             <li>
-                                <button class="navigation btn" onclick="popUp()">
-                                        <div class="btn_icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
-                                        <div class="btn_name"><p>{{current_user.name}} {{current_user.second_name}}</p></div>
+                                <button class="navigation navbtn" onclick="popUp()">
+                                        <div class="navbtn_icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></div>
+                                        <div class="navbtn_name"><p>{{current_user.name}} {{current_user.second_name}}</p></div>
                                 </button>
                             </li>
 
@@ -93,6 +92,8 @@
     <div class="middle_side-nav content_layout">
         {% block dashboard_content %}{% endblock %}
     </div>
+    <!-- Подложка под модальным окном -->
+    <div class="overlay" id="overlay-modal"></div>
 </div>
 
 {% endblock %}

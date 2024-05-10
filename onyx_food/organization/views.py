@@ -6,7 +6,7 @@ from onyx_food.utils.helpers import render_template
 from onyx_food.utils.decorators import organization_access_required
 from onyx_food.user.models import UserModel
 
-from onyx_food.organization.models import OrganizationModel, MenuModel
+from onyx_food.organization.models import OrganizationModel
 from onyx_food.organization.utils import *
 
 from onyx_food.extensions import db
@@ -67,19 +67,60 @@ class OrganizationChooseView(MethodView):
     
 #SECTION Dashboard
         
-#ANCHOR - DashboardView
+#ANCHOR - Dashboard_RestaurantsView
 class DashboardView(MethodView):
     def get(self, organizationID):
         _organization = get_organization_by_ID(organizationID)
         user_restaurants = get_organization_restaurants(organizationID)
         return render_template("organization/dashboard/index.html", organization=_organization, restaurants=user_restaurants)
+    
+    def post(self, organizationID):
+        return redirect(url_for('organization.restaurant_dashboard', organizationID = organizationID, restaurantID = request.form.get("chosen_restaurant")))
+    
+class RestaurantAdd(MethodView):
+    def get(self, organizationID):
+        return render_template('organization/dashboard/restaurants/add.html')
+    
+    def post(self, organizationID):
+        return RestaurantModel.add(request, organizationID)
 
+class RestaurantDashboard(MethodView):
+    def get(self, organizationID, restaurantID):
+        _organization = get_organization_by_ID(organizationID)
+        _restaurant = get_restaurant_by_ID(restaurantID)
+        return render_template('organization/dashboard/restaurants/index.html', organization=_organization, restaurant=_restaurant)
+    
+class RestaurantReviews(MethodView):
+    def get(self, organizationID, restaurantID):
+        _organization = get_organization_by_ID(organizationID)
+        _restaurant = get_restaurant_by_ID(restaurantID)
+        return render_template('organization/dashboard/restaurants/index.html', organization=_organization, restaurant=_restaurant)
+    
+class RestaurantInfo(MethodView):
+    def get(self, organizationID, restaurantID):
+        _organization = get_organization_by_ID(organizationID)
+        _restaurant = get_restaurant_by_ID(restaurantID)
+        return render_template('organization/dashboard/restaurants/index.html', organization=_organization, restaurant=_restaurant)
+
+class RestaurantDisable(MethodView):
+    def get(self, organizationID, restaurantID):
+        _organization = get_organization_by_ID(organizationID)
+        _restaurant = get_restaurant_by_ID(restaurantID)
+        return render_template('organization/dashboard/restaurants/index.html', organization=_organization, restaurant=_restaurant)
+    
 #ANCHOR - Dashboard_OrdersView
 class Dashboard_OrdersView(MethodView):
     def get(self, organizationID):
         _organization = get_organization_by_ID(organizationID)
-        return render_template("organization/dashboard/orders.html", organization=_organization)
-
+        _orders = get_orders(organizationID)
+        return render_template("organization/dashboard/orders/index.html", organization=_organization, orders=_orders)
+    
+class Dashboard_OrderInfo(MethodView):
+    def get(self,organizationID, orderID):
+        _organization = get_organization_by_ID(organizationID)
+        _orders = get_orders(organizationID)
+        return render_template("organization/dashboard/orders/info.html", organization=_organization, orders=_orders, orderID=orderID)
+    
 #ANCHOR - Dashboard_MenusView
 class Dashboard_MenusView(MethodView):
     def get(self, organizationID):

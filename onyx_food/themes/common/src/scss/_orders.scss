@@ -1,0 +1,21 @@
+.content_body.orders{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    min-height: 400px;
+    .orders_menu{
+        border-right: 1px solid #DDD;
+        .restaurants{
+            padding: 15px;
+            .h2,p{margin:0}
+        }
+    }
+    .order_info{
+        border:none;
+    }
+}
+
+ul.orders{
+    list-style: none;
+    display: grid;  
+    padding-left: 16px;  
+}

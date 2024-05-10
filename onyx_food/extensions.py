@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_caching import Cache
 from flask_wtf.csrf import CSRFProtect
+from flask_bootstrap import Bootstrap
 
 # Themes
 themes = Themes()
@@ -21,6 +22,9 @@ cache = Cache()
 
 # CSRF
 csrf = CSRFProtect()
+
+#Bootstrap
+bootstrap = Bootstrap()
 
 # Database
 metadata = MetaData(

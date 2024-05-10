@@ -1,0 +1,17 @@
+{% extends theme("organization/dashboard/dashboard_layout.html") %}
+{% block dashboard_content %}
+    <script>
+        document.getElementById("restaurants_btn").classList.toggle("active")
+    </script>
+    <div class="content">
+        <div class="content_header borderless">
+            <a class="button header" href="{{ url_for('organization.dashboard', organizationID=organization.id) }}"><i class="fa fa-chevron-left" aria-hidden="true"></i>Главная</a>
+            <a class="button header active" href="{{ url_for('organization.restaurant_dashboard', organizationID=organization.id, restaurantID=restaurant.id) }}">Рейтинг</a>
+            <a class="button header" href="{{ url_for('organization.restaurant_reviews', organizationID=organization.id, restaurantID=restaurant.id) }}">Отзывы</a>
+            <a class="button header" href="{{ url_for('organization.restaurant_info', organizationID=organization.id, restaurantID=restaurant.id) }}">Информация</a>
+            <a class="button dark header" style="float:inline-end" href="{{ url_for('organization.restaurant_disable', organizationID=organization.id, restaurantID=restaurant.id) }}">Отключить</a>
+        </div>
+        <div class="content_body">
+        </div>
+    </div>
+{% endblock %}

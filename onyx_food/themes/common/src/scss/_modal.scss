@@ -1,0 +1,93 @@
+/* Стили для подложки */
+
+.overlay {
+   
+    /* Скрываем подложку  */
+    opacity: 0;
+    visibility: hidden;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 20;
+    transition: .3s all;
+    }
+ 
+ 
+ /* Стили для модальных окон */
+ 
+.modal {
+    
+    /* Скрываем окна  */
+    opacity: 0;
+    visibility: hidden;
+    
+    
+    /*  Установаем ширину окна  */
+    width: fit-content;
+    max-width: 1000px;
+    
+    /*  Центрируем и задаем z-index */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30; /* Должен быть выше чем у подложки*/
+    
+    /*  Побочные стили   */
+    box-shadow: 0 3px 10px -.5px rgba(0, 0, 0, .2); 
+    text-align: center;
+    padding: 30px;
+    border-radius: 3px;
+    background-color: #fff;
+    transition: 0.3s all;
+    input{
+        border: 1px solid #444;
+        border-radius: 12px;
+        
+    }
+    .has-error{
+        border: 1px solid red;
+    }
+    
+}
+.modal.order {
+    /*  Побочные стили   */
+    text-align: center;
+    border-radius: 0px;
+    -webkit-transform: none !important;
+    transform: none !important;
+    top: initial !important;
+    left: initial !important;
+    width: 100%;
+    height: 100%;
+    box-shadow: none !important; 
+    max-width: 1250px !important; ;
+    min-width: 750px !important; ;
+    position: initial;
+}
+.modal-footer{
+    padding: 14px 35px;
+    background-color: #FFFFFF;
+    border-top: 1px solid #F0F0F0;
+    text-align: left;
+}
+
+.modal__cross {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    fill: #444;
+    cursor: pointer;
+}
+
+.modal.active,
+.overlay.active{
+   opacity: 1;
+   visibility: visible;
+}
