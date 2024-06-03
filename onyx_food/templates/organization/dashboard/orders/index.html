@@ -14,23 +14,34 @@
             <ul class="orders">
                 {% for order in orders %}
                 <li>
-                    <div id="order_{{order.id}}"class="button node btn-order-open" data-toggle="modal" data-modal="{{ url_for('organization.dashboard_order_info', organizationID=organization.id, orderID=order.id) }}">
-                        <h2>{{ order.price }}</h2>
-                        <p>№ {{ order.id }}</p>
-                        <p>Доставка Onyx-Food</p>
-                    </div>
+                    {% if order.status == 1 %}
+                        <div id="order_{{order.id}}"class="new_order button node btn-order-open" data-toggle="modal" data-modal="{{ url_for('organization.dashboard_order_info', organizationID=organization.id, orderID=order.id) }}">
+                    {% else %}
+                        <div id="order_{{order.id}}"class="button node btn-order-open" data-toggle="modal" data-modal="{{ url_for('organization.dashboard_order_info', organizationID=organization.id, orderID=order.id) }}">
+                    {% endif %}
+                            <h2>№{{ order.id }} | {{ order.price }}</h2>
+                            <p>{{ order.restaurant.name }}, {{ order.restaurant.street }}, {{ order.restaurant.house }}</p>
+                            {% if order.restaurant.couriers %}
+                                <p>Доставка Onyx-Food</p>
+                            {% else %}
+                                <p>Доставка ресторана</p>
+                            {% endif %}
+                        </div>
                     
                 </li>
                 {% endfor %}
             </ul>
         </div>
         <div class="order_info">
-            <div class="modal order" id="Modal" tabindex="-1" role="dialog" aria-labelledby="FormModal" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <!-- load content here -->
+            <!-- Dynamic Modal -->
+            <div class="modal order fade" id="Modal-order" tabindex="-1" role="dialog" aria-labelledby="FormModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <!-- load content here -->
+                    </div>
                 </div>
             </div>
+            <!-- End Dynamic Modal -->
         </div>
         </div>
     </div>

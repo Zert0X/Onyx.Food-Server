@@ -51,6 +51,20 @@ a.button{
         }
         
     }
+    &.category{
+        box-shadow: none;
+        margin: 0;
+        min-height: 45px;
+        padding-top: 24px;
+        padding-bottom: 0;
+        font-size: 20;
+        border-radius: 20px !important;
+        &.active{
+            background: #f0f0f0;
+            pointer-events: none !important;
+        }
+        
+    }
 }
 .button:hover{
     background-color: rgb(240, 240, 240);

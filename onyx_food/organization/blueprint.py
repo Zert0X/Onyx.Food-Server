@@ -22,8 +22,17 @@ register_view(
 
 register_view(
         organization,
-        routes=['/<int:organizationID>/menus'],
+        routes=['/<int:organizationID>/menu'],
         view_func=Dashboard_MenusView.as_view('dashboard_menus'))
+register_view(
+        organization,
+        routes=['/<int:organizationID>/menu/<int:categoryID>/info'],
+        view_func=Dashboard_MenuInfo.as_view('dashboard_menu_info'))
+register_view(
+        organization,
+        routes=['/<int:organizationID>/menu/add_category'],
+        view_func=Dashboard_MenuAddCategory.as_view('dashboard_menu_add_category'))
+
 register_view(
         organization,
         routes=['/<int:organizationID>/statistics_btn'],

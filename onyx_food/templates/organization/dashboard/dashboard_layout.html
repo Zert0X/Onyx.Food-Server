@@ -22,7 +22,12 @@
                                         <a class="navigation navbtn" id="orders_btn" href="{{url_for('organization.dashboard_orders', organizationID=organization.id)}}">
                                             <div class="link_content">
                                                 <div class="navbtn_icon"><i class="fa fa-archive" aria-hidden="true"></i></div>
-                                                <div class="navbtn_name"><p>Заказы</p></div>
+                                                <div class="navbtn_name"><p>Заказы
+                                                {% if new_order %}
+                                                    <i class="fa fa-circle" aria-hidden="true" style="font-size: 12px; color: #f44611;"></i>
+                                                {% endif %}
+                                                </p>
+                                                </div>
                                             </div>
                                         </a>
                                         <a class="navigation navbtn" id="menus_btn" href="{{url_for('organization.dashboard_menus', organizationID=organization.id)}}">

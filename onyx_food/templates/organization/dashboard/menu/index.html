@@ -1,0 +1,51 @@
+{% extends theme("organization/dashboard/dashboard_layout.html") %}
+{% block dashboard_content %}
+<script>
+    document.getElementById("menus_btn").classList.toggle("active")
+</script>
+<div class="content">
+    <div class="content_header">
+        <h1 style="display: inline;">Меню</h1>
+        <a class="button" onClick="window.location.reload();"><i class="fa fa-qrcode" aria-hidden="true"></i> QR Меню</a>
+        <a class="button" >Сделаем вид что это выпадающий список<i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+    </div>
+    <div class="content_body orders">
+        <div class="orders_menu">
+            <div style="display: grid; margin-left: 20px; margin-right: 20px;">
+                <p style="font-weight: bold;">Меню</p>
+                <a class="button btn-modal-open" data-toggle="modal" data-modal="{{ url_for('organization.dashboard_menu_add_category', organizationID=organization.id) }}" style="width: 200px; text-align: center;">Добавить категорию</a>
+            </div>
+            <ul class="orders" style="border-top: 1px solid #DDD; padding-left: 0px; padding-top: 2px;">
+                {% for category in categories %}
+                    <li>
+                        <div id="category_{{category.id}}"class="button category btn-order-open" data-toggle="modal" data-modal="{{ url_for('organization.dashboard_menu_info', organizationID=organization.id, categoryID=category.id) }}">
+                            {{ category.name }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="order_info">
+            <!-- Dynamic Modal -->
+            <div class="modal order fade" id="Modal-order" tabindex="-1" role="dialog" aria-labelledby="FormModal" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <!-- load content here -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Dynamic Modal -->
+        </div>
+        </div>
+    </div>
+    <!-- Dynamic Modal -->
+    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="FormModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <!-- load content here -->
+            </div>
+        </div>
+    </div>
+    <!-- End Dynamic Modal -->
+</div>
+{% endblock %}

@@ -72,7 +72,8 @@ class DashboardView(MethodView):
     def get(self, organizationID):
         _organization = get_organization_by_ID(organizationID)
         user_restaurants = get_organization_restaurants(organizationID)
-        return render_template("organization/dashboard/index.html", organization=_organization, restaurants=user_restaurants)
+        _new_order = check_new_orders(organizationID)
+        return render_template("organization/dashboard/index.html", organization=_organization, restaurants=user_restaurants, new_order=_new_order)
     
     def post(self, organizationID):
         return redirect(url_for('organization.restaurant_dashboard', organizationID = organizationID, restaurantID = request.form.get("chosen_restaurant")))
@@ -88,19 +89,22 @@ class RestaurantDashboard(MethodView):
     def get(self, organizationID, restaurantID):
         _organization = get_organization_by_ID(organizationID)
         _restaurant = get_restaurant_by_ID(restaurantID)
-        return render_template('organization/dashboard/restaurants/index.html', organization=_organization, restaurant=_restaurant)
+        _new_order = check_new_orders(organizationID)
+        return render_template('organization/dashboard/restaurants/index.html', organization=_organization, restaurant=_restaurant, new_order=_new_order)
     
 class RestaurantReviews(MethodView):
     def get(self, organizationID, restaurantID):
         _organization = get_organization_by_ID(organizationID)
         _restaurant = get_restaurant_by_ID(restaurantID)
-        return render_template('organization/dashboard/restaurants/index.html', organization=_organization, restaurant=_restaurant)
+        _new_order = check_new_orders(organizationID)
+        return render_template('organization/dashboard/restaurants/index.html', organization=_organization, restaurant=_restaurant, new_order=_new_order)
     
 class RestaurantInfo(MethodView):
     def get(self, organizationID, restaurantID):
         _organization = get_organization_by_ID(organizationID)
         _restaurant = get_restaurant_by_ID(restaurantID)
-        return render_template('organization/dashboard/restaurants/index.html', organization=_organization, restaurant=_restaurant)
+        _new_order = check_new_orders(organizationID)
+        return render_template('organization/dashboard/restaurants/index.html', organization=_organization, restaurant=_restaurant, new_order=_new_order)
 
 class RestaurantDisable(MethodView):
     def get(self, organizationID, restaurantID):
@@ -113,7 +117,8 @@ class Dashboard_OrdersView(MethodView):
     def get(self, organizationID):
         _organization = get_organization_by_ID(organizationID)
         _orders = get_orders(organizationID)
-        return render_template("organization/dashboard/orders/index.html", organization=_organization, orders=_orders)
+        _new_order = check_new_orders(organizationID)
+        return render_template("organization/dashboard/orders/index.html", organization=_organization, orders=_orders, new_order=_new_order)
     
 class Dashboard_OrderInfo(MethodView):
     def get(self,organizationID, orderID):
@@ -125,29 +130,52 @@ class Dashboard_OrderInfo(MethodView):
 class Dashboard_MenusView(MethodView):
     def get(self, organizationID):
         _organization = get_organization_by_ID(organizationID)
-        return render_template("organization/dashboard/menus.html", organization=_organization)
+        _categories = get_categories(organizationID)
+        _new_order = check_new_orders(organizationID)
+        return render_template("organization/dashboard/menu/index.html", organization=_organization, categories=_categories, new_order=_new_order)
 
+class Dashboard_MenuInfo(MethodView):
+    def get(self,organizationID, categoryID):
+        _organization = get_organization_by_ID(organizationID)
+        _category = get_category_by_ID(categoryID)
+        return render_template("organization/dashboard/menu/info.html", organization=_organization, category=_category)
+
+class Dashboard_MenuAddCategory(MethodView):
+    def get(self, organizationID):
+        _organization = get_organization_by_ID(organizationID)
+        _categories = get_categories()
+        _org_categories = get_categories(organizationID)
+        return render_template("organization/dashboard/menu/add_category.html", organization=_organization, categories = _categories, org_categories=_org_categories)
+    
+    def post(self, organizationID):
+        return CategoriesToOrgsModel.add(request, organizationID)
+   
 #ANCHOR - Dashboard_StatisticsView
 class Dashboard_StatisticsView(MethodView):
     def get(self, organizationID):
         _organization = get_organization_by_ID(organizationID)
-        return render_template("organization/dashboard/statistics.html", organization=_organization)
+        _new_order = check_new_orders(organizationID)
+        return render_template("organization/dashboard/statistics.html", organization=_organization, new_order=_new_order)
 
 #ANCHOR - Dashboard_HistoryView
 class Dashboard_HistoryView(MethodView):
     def get(self, organizationID):
         _organization = get_organization_by_ID(organizationID)
-        return render_template("organization/dashboard/history.html", organization=_organization)
+        _new_order = check_new_orders(organizationID)
+        return render_template("organization/dashboard/history.html", organization=_organization, new_order=_new_order)
 
 #ANCHOR - Dashboard_WorkHoursView
 class Dashboard_WorkHoursView(MethodView):
     def get(self, organizationID):
         _organization = get_organization_by_ID(organizationID)
-        return render_template("organization/dashboard/work_hours.html", organization=_organization)
+        _new_order = check_new_orders(organizationID)
+        return render_template("organization/dashboard/work_hours.html", organization=_organization, new_order=_new_order)
 
 #ANCHOR - Dashboard_CookingTimeView
 class Dashboard_CookingTimeView(MethodView):
     def get(self, organizationID):
         _organization = get_organization_by_ID(organizationID)
-        return render_template("organization/dashboard/cooking_time.html", organization=_organization)  
+        _new_order = check_new_orders(organizationID)
+        return render_template("organization/dashboard/cooking_time.html", organization=_organization, new_order=_new_order)
+    
 #!SECTION

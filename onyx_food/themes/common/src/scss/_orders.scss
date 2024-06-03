@@ -4,6 +4,10 @@
     min-height: 400px;
     .orders_menu{
         border-right: 1px solid #DDD;
+        position: fixed;
+        overflow: scroll;
+        scrollbar-width: thin;
+        height: 100%;
         .restaurants{
             padding: 15px;
             .h2,p{margin:0}
@@ -11,9 +15,15 @@
     }
     .order_info{
         border:none;
+        margin-left: 330px;
     }
 }
-
+.new_order{
+    background-color: #ffdf64;
+}
+.btn-order-open.active{
+        background-color: #f5e08c !important;
+    }
 ul.orders{
     list-style: none;
     display: grid;  

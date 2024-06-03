@@ -3,9 +3,11 @@ from flask_login import current_user
 from flask import jsonify
 import requests
 
-from sqlalchemy import ForeignKey, DateTime, String, Integer, Boolean, Float, Date, text, Text, ForeignKeyConstraint
+from sqlalchemy import ForeignKey, DateTime, String, Integer, Boolean, Float
+from sqlalchemy.orm import relationship
 from onyx_food.utils.exceptions import ValidationError
 
+#SECTION Organizations
 class OrganizationModel(db.Model):
     __bind_key__  = 'main'
     __tablename__ = 'organizations'
@@ -44,7 +46,7 @@ class OrganizationModel(db.Model):
         return True
 
 
-
+#!SECTION
 #SECTION Restaurants
 class RestaurantModel(db.Model):
     __bind_key__ = 'main'
@@ -89,7 +91,8 @@ class RestaurantModel(db.Model):
         db.session.refresh(NewRestaurant)
         db.session.expunge_all()
         return "ok"
-    
+#!SECTION
+#SECTION Orders    
 class OrderModel(db.Model):
     __bind_key__ = 'main'
     __tablename__ = 'orders'
@@ -100,10 +103,116 @@ class OrderModel(db.Model):
     user_id = db.Column(Integer, db.ForeignKey("users.id"), nullable=False)
     courier_id = db.Column(Integer, db.ForeignKey("users.id"), nullable=False)
     restaurant_id = db.Column(Integer, db.ForeignKey("restaurants.id"), nullable=False)
+    restaurant = relationship("RestaurantModel")
     coordinates = db.Column(String, nullable=False)
     delivery_time = db.Column(Integer, nullable=False)
     comment = db.Column(String, nullable=False)
     people_quantity = db.Column(Integer, nullable=False)
     price = db.Column(Float, nullable=False)
+#!SECTION
+#SECTION Categories
+class CategoryModel(db.Model):
+    __bind_key__ = 'main'
+    __tablename__ = 'categories'
+
+    id       = db.Column(Integer, nullable=False, primary_key=True)
+    name     = db.Column(String, nullable=False)
+    default = db.Column(Boolean,  nullable=False, default=0)
+
+class CategoriesToOrgsModel(db.Model):
+    __bind_key__ = 'main'
+    __tablename__ = 'categories_to_organizations'
+
+    id       = db.Column(Integer, nullable=False, primary_key=True)
+    org_id   = db.Column(Integer, db.ForeignKey("organizations.id"), nullable=False)
+    category_id   = db.Column(Integer, db.ForeignKey("categories.id"), nullable=False)
+    category = relationship("CategoryModel")
+    
+    @classmethod
+    def add(self, request, organizationID):
+        NewCategory = CategoryModel()
+        
+        data = {}
+        NewCategory.org_id = organizationID
+        if(request.form.get("default-category")!=""):
+            NewCategoryLink = CategoriesToOrgsModel()
+            NewCategoryLink.org_id = organizationID
+            NewCategoryLink.category_id = request.form.get("default-category")
+            db.session.add(NewCategoryLink)
+            db.session.commit()
+            db.session.refresh(NewCategoryLink)
+            db.session.expunge_all()
+            return "ok"
+        else:
+            if(request.form.get("add_name")==""):
+                data["add_name"] = "Имя не может быть пустым"
+            if(not data):
+                NewCategory.name      = request.form.get("add_name")
+                db.session.add(NewCategory)
+                db.session.commit()
+                db.session.refresh(NewCategory)
+
+        if(data):
+            return jsonify(data), 200
+        
+        NewCategoryLink = CategoriesToOrgsModel()
+        NewCategoryLink.org_id = organizationID
+        NewCategoryLink.category_id = NewCategory.id
+        db.session.add(NewCategoryLink)
+        db.session.commit()
+        db.session.refresh(NewCategoryLink)
+        db.session.expunge_all()
+        return "ok"
+#!SECTION
+#SECTION FoodItems
+class FoodItemModel(db.Model):
+    __bind_key__ = 'main'
+    __tablename__ = 'food_items'
+
+    id              = db.Column(Integer, nullable=False, primary_key=True)
+    org_id          = db.Column(Integer, db.ForeignKey("organizations.id"), nullable=False)
+    name            = db.Column(String,  nullable=False)
+    description     = db.Column(String)
+    ingredients     = db.Column(String,  nullable=False)
+    stop_list       = db.Column(Boolean, nullable=False, default=0)
+    price           = db.Column(Float,   nullable=False, default=0)
+    cooking_time    = db.Column(Integer, nullable=False)
+    week            = db.Column(Integer)
+    options         = db.Column(String)
+    
+#ANCHOR - FoodItemToRestaurants
+class FoodItemToRestaurants(db.Model):
+    __bind_key__  = 'main'
+    __tablename__ = 'food_items_to_restaurants'
+
+    id              = db.Column(Integer, nullable=False, primary_key=True)
+    food_item_id    = db.Column(Integer, db.ForeignKey("food_items.id"), nullable=False)
+    restaurant_id   = db.Column(Integer, db.ForeignKey("restaurants.id"))
+    restaurant      = relationship("RestaurantModel")
+    food_item       = relationship("FoodItemModel")
+
+#ANCHOR - FoodItemToOrders
+class FoodItemToOrders(db.Model):
+    __bind_key__ = 'main'
+    __tablename__ = 'food_items_to_orders'
+
+    id              = db.Column(Integer, nullable=False, primary_key=True)
+    food_item_id    = db.Column(Integer, db.ForeignKey("food_items.id"), nullable=False)
+    order_id        = db.Column(Integer, db.ForeignKey("orders.id"), nullable=False)
+    order           = relationship("OrderModel")
+    food_item       = relationship("FoodItemModel")
+    price           = db.Column(Float, nullable=False, default=0)
+    options         = db.Column(String)
+
+#ANCHOR - FoodItemToCategories
+class FoodItemToCategories(db.Model):
+    __bind_key__ = 'main'
+    __tablename__ = 'food_items_to_categories'
+
+    id              = db.Column(Integer, nullable=False, primary_key=True)
+    food_item_id    = db.Column(Integer, db.ForeignKey("food_items.id"), nullable=False)
+    category_id     = db.Column(Integer, db.ForeignKey("categories.id"), nullable=False)
+    category        = relationship("CategoryModel")
+    food_item       = relationship("FoodItemModel")
 
 #!SECTIONs
